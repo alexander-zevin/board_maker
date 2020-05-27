@@ -1,35 +1,63 @@
-import React, {FC} from 'react';
-import {useParams} from "react-router-dom";
-import {IBoardScreenProps} from "./BoardScreenTypes";
-import {BoardBox} from "../Main/BoarderList/Board/BoardStyles";
-import {AddList} from "./BoardScreenStyles";
-
+import React, {FC, useState} from 'react';
+import {useParams, Redirect} from "react-router-dom";
+import {IAddList, IBoardScreenProps} from "./BoardScreenTypes";
+import {AddBlock, AddListBox, AddListInput, BoardBackBox, ListsSection} from "./BoardScreenStyles";
+import {List} from "./List/List";
+import {useDispatch} from "react-redux";
+import {addBoardActionCreator, addListActionCreator} from "../../store/actions/boards";
 
 export const BoardScreen: FC<IBoardScreenProps> = ({boards}) => {
 
-    const {id} = useParams();
+    const dispatch = useDispatch();
 
-    let name;
-    let list;
+    const {boardId} = useParams();
 
-    boards.forEach(
-        (item) => {
-            if (item.id === Number(id)) {
-                name = item.name
-                list = item.list
-            }
+    let board = boards.find(item => item.id === Number(boardId));
+
+    // if (!board) throw new Error('Board not found');
+
+    const addList: IAddList = name => {
+        if (name !== '' && board) {
+            let matches: number;
+            let newListId: number;
+            do {
+                matches = 0;
+                newListId = Math.floor(Math.random() * Math.floor(board.list.length + 1));
+                for (let i = 0; i < board.list.length; i++) {
+                    if (board.list[i].listId === newListId) matches++
+                }
+            } while (matches !== 0);
+            dispatch(addListActionCreator(newListId, Number(boardId), name));
+            setInputValue('');
         }
-    )
+    }
+
+    const [inputValue, setInputValue] = useState<string>('')
 
     return (
         <>
-            <BoardBox>
-                {name}
-            </BoardBox>
-
-            <AddList>
-                Add a list
-            </AddList>
+            {
+                board ?
+                <>
+                    <BoardBackBox>{board.name}</BoardBackBox>
+                    <ListsSection>
+                        {board.list &&
+                            board.list.map(
+                                item => <List list={item} />
+                            )
+                        }
+                        <AddListBox>
+                            <AddListInput
+                                onChange={ event => {setInputValue(event.target.value)} }
+                                onKeyUp={event => {event.keyCode === 13 && addList(inputValue)}}
+                                value={inputValue}
+                            /><br/>
+                            <span>Give me a name</span>
+                        </AddListBox>
+                    </ListsSection>
+                </> :
+                <Redirect to="/"/>
+            }
         </>
     )
 }

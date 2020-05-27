@@ -15,7 +15,7 @@ function App() {
         <div className="App">
             <BrowserRouter>
                 <Route exact path='/' component={() => <Main boards={boards}/>} />
-                <Route path='/:id' component={() => <BoardScreen boards={boards}/>} />
+                <Route path='/:boardId' component={() => <BoardScreen boards={boards}/>} />
             </BrowserRouter>
         </div>
     );

@@ -9,7 +9,7 @@ export const CreatorBoardBox = styled.div`
     display: inline-block;
     background-color: #81c784;
     padding: 30px;
-    margin-right: 10px;
+    margin-right: 16px;
     box-shadow: 0 2px 3px rgba(0,0,0,0.5);
 `;
 
@@ -27,7 +27,7 @@ export const AddBox = styled.div`
 export const ButtonBox = styled.div`
     display: flex;
     justify-content: space-evenly;
-    margin-top: 10px;
+    margin-top: 16px;
 `;
 
 export const Button = styled.button`

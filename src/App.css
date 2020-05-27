@@ -1,7 +1,5 @@
 .App {
     height: 100vh;
     padding: 10px;
-    display: flex;
-    align-items: flex-start;
     background-color: #fafafa;
 }

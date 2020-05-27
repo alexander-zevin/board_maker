@@ -1,5 +1,5 @@
 import {ActionType, IState} from "../types/types";
-import {ADD_BOARD} from "../constants/constants";
+import {ADD_BOARD, ADD_LIST} from "../constants/constants";
 
 const initialState: IState = {
     boards: []
