@@ -4,7 +4,7 @@ import {IAddList, IBoardScreenProps} from "./BoardScreenTypes";
 import {AddBlock, AddListBox, AddListInput, BoardBackBox, ListsSection} from "./BoardScreenStyles";
 import {List} from "./List/List";
 import {useDispatch} from "react-redux";
-import {addBoardActionCreator, addListActionCreator} from "../../store/actions/boards";
+import {addListActionCreator} from "../../store/actions/listActions";
 
 export const BoardScreen: FC<IBoardScreenProps> = ({boards}) => {
 
@@ -43,7 +43,7 @@ export const BoardScreen: FC<IBoardScreenProps> = ({boards}) => {
                     <ListsSection>
                         {board.list &&
                             board.list.map(
-                                item => <List list={item} />
+                                item => <List list={item} boardId={Number(boardId)}/>
                             )
                         }
                         <AddListBox>

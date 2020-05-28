@@ -20,7 +20,7 @@ export const ListsSection = styled.div`
 export const AddListInput = styled.input.attrs(props => ({
     placeholder: 'Add a list'
 }))`
-    border-width: 2px;
+    border-width: 1px;
     padding: 5px;
     margin-top: 10px;
     outline: none;

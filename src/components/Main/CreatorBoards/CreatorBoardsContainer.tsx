@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import {CreatorBoards} from "./CreatorBoards";
 import {IAddBoard, ICreatorBoardsContainer} from "./CreatorBoardsTypes";
-import {addBoardActionCreator} from "../../../store/actions/boards";
+import {addBoardActionCreator} from "../../../store/actions/boardsActions";
 import {useDispatch} from "react-redux";
 
 export const CreatorBoardsContainer: FC<ICreatorBoardsContainer> = ({boards}) => {

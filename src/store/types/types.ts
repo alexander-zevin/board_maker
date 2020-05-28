@@ -1,4 +1,6 @@
-import {ADD_BOARD, ADD_LIST} from "../constants/constants";
+import {ADD_BOARD} from "../constants/boardsConstants";
+import {ADD_LIST} from "../constants/listsConstants";
+import {ADD_TASK} from "../constants/tasksActions";
 
 export interface ITask {
     taskId: number
@@ -35,4 +37,12 @@ export interface IAddListAction {
     name: string
 }
 
-export type ActionType = IAddBoardAction
+export interface IAddTaskAction {
+    type: typeof ADD_TASK
+    taskId: number
+    listId: number
+    boardId: number
+    taskName: string
+}
+
+export type ActionType = IAddBoardAction | IAddListAction | IAddTaskAction
