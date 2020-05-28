@@ -14,6 +14,7 @@ export const List: FC<IListProps> = ({list, boardId}) => {
     const listId: number = list.listId;
 
     const addTask = (listId: number, boardId: number, name: string) => {
+        debugger
         if (inputValue !== '') {
             let matches: number;
             let newTaskId: number;
@@ -24,7 +25,7 @@ export const List: FC<IListProps> = ({list, boardId}) => {
                     if (list.tasks[i].taskId === newTaskId) matches++
                 }
             } while (matches !== 0);
-            dispatch(addTaskActionCreator(newTaskId, listId, boardId, name));
+            dispatch(addTaskActionCreator(newTaskId, boardId, listId, name));
         }
     }
 

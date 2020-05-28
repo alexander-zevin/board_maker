@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import {useParams, Redirect} from "react-router-dom";
 import {IAddList, IBoardScreenProps} from "./BoardScreenTypes";
-import {AddBlock, AddListBox, AddListInput, BoardBackBox, ListsSection} from "./BoardScreenStyles";
+import {AddListBox, AddListInput, BoardBackBox, ListsSection} from "./BoardScreenStyles";
 import {List} from "./List/List";
 import {useDispatch} from "react-redux";
 import {addListActionCreator} from "../../store/actions/listActions";
@@ -12,8 +12,8 @@ export const BoardScreen: FC<IBoardScreenProps> = ({boards}) => {
 
     const {boardId} = useParams();
 
-    let board = boards.find(item => item.id === Number(boardId));
     debugger
+    let board = boards.find(item => item.id === Number(boardId));
 
     // if (!board) throw new Error('Board not found');
 

@@ -20,11 +20,8 @@ export const boardReducer = (state = initialState, action: ActionType): IState =
             return Object.assign({}, state, {
                 boards: state.boards.map(board => {
                     if (board.id === action.boardId) {
-                        return {
-                            ...board,
-                            list: listReducer(board.list, action)
-                        }
-                    }
+                        return listReducer(board, action)
+                    } else return board
                 })
             })
         }
@@ -32,11 +29,9 @@ export const boardReducer = (state = initialState, action: ActionType): IState =
             return Object.assign({}, state, {
                 boards: state.boards.map(board => {
                     if (board.id === action.boardId) {
-                        return {
-                            ...board,
-                            list: listReducer(board.list, action)
-                        }
-                    }
+                        debugger
+                        return listReducer(board, action)
+                    } else return board
                 })
             })
         }

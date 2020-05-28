@@ -1,13 +1,17 @@
-import {ActionType, ITask} from "../types/types";
+import {ActionType, IList, ITask} from "../types/types";
 import {ADD_TASK} from "../constants/tasksActions";
 
-export const taskReducer = (state: Array<ITask>, action: ActionType): Array<ITask> => {
+export const taskReducer = (state: IList, action: ActionType): IList => {
+    debugger
     switch (action.type) {
         case ADD_TASK:
-            return [
+            return {
                 ...state,
-                {taskId: action.taskId, taskText: action.taskName, isPerformed: false}
-            ]
+                tasks: [
+                    ...state.tasks,
+                    {taskId: action.taskId, taskText: action.taskName, isPerformed: false}
+                ]
+            }
         default: return state;
     }
 }

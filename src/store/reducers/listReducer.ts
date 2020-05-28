@@ -1,34 +1,30 @@
-import {ActionType, IList} from "../types/types";
+import {ActionType, IBoard, IList} from "../types/types";
 import {ADD_LIST} from "../constants/listsConstants";
 import {ADD_TASK} from "../constants/tasksActions";
 import {taskReducer} from "./tasksReducer";
 
-export const listReducer = (state: Array<IList>, action: ActionType): Array<IList> => {
+export const listReducer = (state: IBoard, action: ActionType): IBoard => {
     switch (action.type) {
         case ADD_LIST: {
-            return [
+            return {
                 ...state,
-                {listId: action.id, listName: action.name, tasks: []}
-            ]
+                list: [
+                    ...state.list,
+                    {listId: action.id, listName: action.name, tasks: []}
+                ]
+            }
         }
         case ADD_TASK: {
-            return [
+            return {
                 ...state,
-                Object.assign({}, state[action.listId], {
-                    tasks: taskReducer(state[action.listId].tasks, action)
+                list: state.list.map(listItem => {
+                    if (listItem.listId === action.listId) {
+                        debugger
+                        return taskReducer(listItem, action)
+                    } else return listItem
                 })
-            ]
+            }
         }
-        /*case ADD_TASK: {
-            return [
-                ...state,
-                state.find(element => {
-                    if (element.listId === action.listId) {
-                        return []
-                    }
-                })
-            ]
-        }*/
         default: return state;
     }
 }
