@@ -19,6 +19,16 @@ export const listReducer = (state: Array<IList>, action: ActionType): Array<ILis
                 })
             ]
         }
+        /*case ADD_TASK: {
+            return [
+                ...state,
+                state.find(element => {
+                    if (element.listId === action.listId) {
+                        return []
+                    }
+                })
+            ]
+        }*/
         default: return state;
     }
 }

@@ -13,6 +13,7 @@ export const BoardScreen: FC<IBoardScreenProps> = ({boards}) => {
     const {boardId} = useParams();
 
     let board = boards.find(item => item.id === Number(boardId));
+    debugger
 
     // if (!board) throw new Error('Board not found');
 
