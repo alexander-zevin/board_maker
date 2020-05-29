@@ -3,7 +3,9 @@ import {AddTasksInput, ListBox} from "./ListStyles";
 import {IListProps} from "./ListTypes";
 import {Task} from "./Task/Task";
 import {useDispatch} from "react-redux";
-import {addTaskActionCreator} from "../../../store/actions/tasksActions";
+import {addTaskActionCreator, setTasksActionCreator} from "../../../store/actions/tasksActions";
+import {arrayMove, SortableContainer, SortableElement} from 'react-sortable-hoc';
+import {ITask} from "../../../store/types/types";
 
 export const List: FC<IListProps> = ({list, boardId}) => {
 
@@ -14,7 +16,6 @@ export const List: FC<IListProps> = ({list, boardId}) => {
     const listId: number = list.listId;
 
     const addTask = (listId: number, boardId: number, name: string) => {
-        debugger
         if (inputValue !== '') {
             let matches: number;
             let newTaskId: number;
@@ -29,6 +30,23 @@ export const List: FC<IListProps> = ({list, boardId}) => {
         }
     }
 
+    const SortableItem = SortableElement(({item}: {item: ITask}) =>
+        <Task taskId={item.taskId} taskText={item.taskText} isPerformed={item.isPerformed} listId={listId} boardId={boardId}/>);
+
+    const SortableList = SortableContainer(({tasks}: {tasks: Array<ITask>}) => {
+        return (
+            <div>
+                {
+                    tasks.map((item: ITask, index: number) => <SortableItem key={`item-${item.taskId}`} index={index} item={item}/>)
+                }
+            </div>
+        )
+    })
+
+    const onSortEnd = ({oldIndex, newIndex}: {oldIndex: number, newIndex: number}) => {
+        dispatch(setTasksActionCreator(arrayMove(list.tasks, oldIndex, newIndex), boardId, listId))
+    };
+
     return (
         <ListBox>
             <span>{list.listName}</span><br/>
@@ -37,10 +55,7 @@ export const List: FC<IListProps> = ({list, boardId}) => {
                 onChange={event => {setInputValue(event.target.value)}}
                 onKeyUp={event => {event.keyCode === 13 && addTask(listId, boardId, inputValue)}}
             />
-            {
-                list.tasks.map(item =>
-                    <Task taskId={item.taskId} taskText={item.taskText} isPerformed={item.isPerformed} listId={listId} boardId={boardId}/>)
-            }
+            <SortableList tasks={list.tasks} onSortEnd={onSortEnd}/>
         </ListBox>
     )
 }

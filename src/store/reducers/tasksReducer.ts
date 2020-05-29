@@ -1,5 +1,5 @@
 import {ActionType, IList} from "../types/types";
-import {ADD_TASK, SET_PERFORMED} from "../constants/tasksContants";
+import {ADD_TASK, SET_PERFORMED, SET_TASKS} from "../constants/tasksContants";
 
 export const taskReducer = (state: IList, action: ActionType): IList => {
     debugger
@@ -23,6 +23,12 @@ export const taskReducer = (state: IList, action: ActionType): IList => {
                         }
                     } else return item
                 })
+            }
+        }
+        case SET_TASKS: {
+            return {
+                ...state,
+                tasks: action.tasks
             }
         }
         default: return state;

@@ -56,7 +56,6 @@ export const BoardScreen: FC<IBoardScreenProps> = ({boards}) => {
                         </AddListBox>
                     </ListsSection>
                 </> : <span>Not Found</span>
-                // <Redirect to="/"/>
             }
         </>
     )

@@ -1,6 +1,6 @@
 import {ActionType, IBoard, IList} from "../types/types";
 import {ADD_LIST} from "../constants/listsConstants";
-import {ADD_TASK, SET_PERFORMED} from "../constants/tasksContants";
+import {ADD_TASK, SET_PERFORMED, SET_TASKS} from "../constants/tasksContants";
 import {taskReducer} from "./tasksReducer";
 
 export const listReducer = (state: IBoard, action: ActionType): IBoard => {
@@ -14,6 +14,7 @@ export const listReducer = (state: IBoard, action: ActionType): IBoard => {
                 ]
             }
         }
+        case SET_TASKS:
         case SET_PERFORMED:
         case ADD_TASK: {
             return {
