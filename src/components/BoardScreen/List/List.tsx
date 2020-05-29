@@ -39,7 +39,7 @@ export const List: FC<IListProps> = ({list, boardId}) => {
             />
             {
                 list.tasks.map(item =>
-                    <Task taskId={item.taskId} taskText={item.taskText} isPerformed={item.isPerformed} />)
+                    <Task taskId={item.taskId} taskText={item.taskText} isPerformed={item.isPerformed} listId={listId} boardId={boardId}/>)
             }
         </ListBox>
     )

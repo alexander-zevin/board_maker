@@ -12,10 +12,8 @@ export const BoardScreen: FC<IBoardScreenProps> = ({boards}) => {
 
     const {boardId} = useParams();
 
-    debugger
     let board = boards.find(item => item.id === Number(boardId));
-
-    // if (!board) throw new Error('Board not found');
+    debugger
 
     const addList: IAddList = name => {
         if (name !== '' && board) {
@@ -52,12 +50,13 @@ export const BoardScreen: FC<IBoardScreenProps> = ({boards}) => {
                                 onChange={ event => {setInputValue(event.target.value)} }
                                 onKeyUp={event => {event.keyCode === 13 && addList(inputValue)}}
                                 value={inputValue}
+                                autoFocus={true}
                             /><br/>
                             <span>Give me a name</span>
                         </AddListBox>
                     </ListsSection>
-                </> :
-                <Redirect to="/"/>
+                </> : <span>Not Found</span>
+                // <Redirect to="/"/>
             }
         </>
     )

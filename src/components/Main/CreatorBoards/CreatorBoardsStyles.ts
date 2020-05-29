@@ -7,7 +7,7 @@ export const Title = styled.span`
 export const CreatorBoardBox = styled.div`
     text-align: center;
     display: inline-block;
-    background-color: #81c784;
+    background-color: #bbdefb;
     padding: 30px;
     margin-right: 16px;
     box-shadow: 0 2px 3px rgba(0,0,0,0.5);

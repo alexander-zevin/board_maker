@@ -13,7 +13,9 @@ export const CreatorBoards: FC<ICreatorBoardsProps> = ({openCreatorBoards, setCr
                     <div><span>What shall we call the board</span></div>
                     <Input
                         onChange={(event) => {setInputValue(event.target.value)}}
+                        onKeyUp={event => {event.keyCode === 13 && addBoard(inputValue)}}
                         value={inputValue}
+                        autoFocus={true}
                     />
                     <ButtonBox>
                         <Button onClick={() => {setCreatorBoards(false)}}>CANCEL</Button>

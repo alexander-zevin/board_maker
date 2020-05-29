@@ -1,8 +1,8 @@
 import {ActionType, IState} from "../types/types";
-import {ADD_BOARD} from "../constants/boardsConstants";
+import {ADD_BOARD, SET_STATE} from "../constants/boardsConstants";
 import {ADD_LIST} from "../constants/listsConstants";
 import {listReducer} from "./listReducer";
-import {ADD_TASK} from "../constants/tasksActions";
+import {ADD_TASK, SET_PERFORMED} from "../constants/tasksContants";
 
 const initialState: IState = {
     boards: []
@@ -16,6 +16,8 @@ export const boardReducer = (state = initialState, action: ActionType): IState =
                 boards: [...state.boards, {id: action.id, name: action.name, list: []}]
             }
         }
+        case ADD_TASK:
+        case SET_PERFORMED:
         case ADD_LIST: {
             return Object.assign({}, state, {
                 boards: state.boards.map(board => {
@@ -25,15 +27,8 @@ export const boardReducer = (state = initialState, action: ActionType): IState =
                 })
             })
         }
-        case ADD_TASK: {
-            return Object.assign({}, state, {
-                boards: state.boards.map(board => {
-                    if (board.id === action.boardId) {
-                        debugger
-                        return listReducer(board, action)
-                    } else return board
-                })
-            })
+        case SET_STATE: {
+            return action.state
         }
         default: return state;
     }

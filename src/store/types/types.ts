@@ -1,6 +1,6 @@
-import {ADD_BOARD} from "../constants/boardsConstants";
+import {ADD_BOARD, SET_STATE} from "../constants/boardsConstants";
 import {ADD_LIST} from "../constants/listsConstants";
-import {ADD_TASK} from "../constants/tasksActions";
+import {ADD_TASK, SET_PERFORMED} from "../constants/tasksContants";
 
 export interface ITask {
     taskId: number
@@ -45,4 +45,17 @@ export interface IAddTaskAction {
     taskName: string
 }
 
-export type ActionType = IAddBoardAction | IAddListAction | IAddTaskAction
+export interface ISetPerformedAction {
+    type: typeof SET_PERFORMED
+    isPerformed: boolean
+    boardId: number
+    listId: number
+    taskId: number
+}
+
+export interface ISetStateAction {
+    type: typeof SET_STATE
+    state: IState
+}
+
+export type ActionType = IAddBoardAction | IAddListAction | IAddTaskAction | ISetPerformedAction | ISetStateAction
